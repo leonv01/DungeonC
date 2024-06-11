@@ -1,7 +1,14 @@
 #include <SFML/Graphics.hpp>
+#include "entity/Player.hpp"
+
+#include <iostream>
 
 int main()
 {
+    Player player{};
+
+    std::cout << "Player created" << std::endl;
+
     auto window = sf::RenderWindow{ { 1920u, 1080u }, "CMake SFML Project" };
     window.setFramerateLimit(144);
 
