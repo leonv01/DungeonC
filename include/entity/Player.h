@@ -1,7 +1,7 @@
-#ifndef __PLAYER_HPP__
-#define __PLAYER_HPP__
+#ifndef DUNGEONC_PLAYER_H
+#define DUNGEONC_PLAYER_H
 
-#include "entity/Entity.hpp"
+#include "entity/Entity.h"
 
 class Player : private Entity {
 public:
@@ -11,6 +11,8 @@ public:
 
     void update(float deltaTime) override;
     void render() override;
+    sf::Texture getTexture() override;
+    void setTexture(sf::Texture sprite) override;
 };
 
-#endif // __PLAYER_HPP__
+#endif //DUNGEONC_PLAYER_H

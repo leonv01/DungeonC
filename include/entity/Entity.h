@@ -1,13 +1,15 @@
-#ifndef __ENTITY_HPP__
-#define __ENTITY_HPP__
+#ifndef DUNGEONC_ENTITY_H
+#define DUNGEONC_ENTITY_H
 
 #include "util/Vector2.hpp"
+#include <SFML/Graphics.hpp>
 
 class Entity{
 protected:
     Vector2 position;
     Vector2 direction;
-    float velocity;
+    float velocity{};
+    sf::Texture texture;
     
 public:
     Entity() = default;
@@ -15,6 +17,9 @@ public:
 
     virtual void update(float deltaTime) = 0;
     virtual void render() = 0;
+
+    virtual sf::Texture getTexture() = 0;
+    virtual void setTexture(sf::Texture sprite) = 0;
 };
 
-#endif // __ENTITY_HPP__
+#endif // DUNGEONC_ENTITY_H
