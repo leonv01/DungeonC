@@ -14,6 +14,7 @@ FetchContent_MakeAvailable(SFML)
 
 include_directories(include)
 
+
 add_executable(main
         src/main.cpp
 
@@ -29,6 +30,8 @@ add_executable(main
         src/core/Game.cpp
         include/core/Game.h
         include/core/Resources.h
+        src/graphics/Animator.cpp
+        include/graphics/Animator.h
 )
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)

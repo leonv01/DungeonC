@@ -20,7 +20,7 @@ public:
 
 private:
     std::map<Identifier, std::unique_ptr<Resource>> mResourceMap;
-    std::string mDirectory = "resources/";
+    std::string mDirectory = "../../resources";
 };
 
 template<typename Resource, typename Identifier>

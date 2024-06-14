@@ -18,6 +18,11 @@ public:
     void update(float deltaTime) override;
     void render() override;
     sf::Texture getTexture() override;
+    void setTexture(sf::Texture sprite) override;
+
+    float getX();
+
+    float getY();
 };
 
 

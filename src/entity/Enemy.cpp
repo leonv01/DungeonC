@@ -19,7 +19,7 @@ Enemy::Enemy(Vector2 position, Vector2 direction, float velocity) {
 Enemy::~Enemy() = default;
 
 void Enemy::update(float deltaTime) {
-
+    position += direction * velocity * deltaTime;
 }
 
 void Enemy::render() {
@@ -27,5 +27,17 @@ void Enemy::render() {
 }
 
 sf::Texture Enemy::getTexture() {
-    return sf::Texture();
+    return texture;
+}
+
+float Enemy::getX() {
+    return position.x;
+}
+
+float Enemy::getY() {
+    return position.y;
+}
+
+void Enemy::setTexture(sf::Texture sprite) {
+    this->texture = sprite;
 }
