@@ -6,6 +6,7 @@
 #include "core/network/Server.h"
 #include "core/network/PacketTypes.h"
 #include "entity/Player.h"
+#include "core/World.h"
 
 Server::Server(unsigned int port) : port(port) {
     listener.listen(port);
@@ -51,7 +52,7 @@ void Server::receivePackets() {
                 PacketType type;
                 packet >> type;
 
-                Player player;
+                Player player = *World::player;
                 switch(type){
                     case PacketType::PLAYER_INPUT:
                         player.deserialize(packet);

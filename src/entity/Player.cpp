@@ -7,6 +7,7 @@ Player::Player(){
     direction = Vector2{ 0.0f, 0.0f };
     velocity = 0.0f;
     texture = sf::Texture{};
+    pid = id++;
 }
 
 Player::Player(Vector2 _position, Vector2 _direction, float _velocity){
@@ -14,6 +15,7 @@ Player::Player(Vector2 _position, Vector2 _direction, float _velocity){
     direction = _direction;
     velocity = _velocity;
     texture = sf::Texture{};
+    pid = id++;
 }
 
 Player::~Player() = default;
@@ -77,4 +79,8 @@ void Player::serialize(sf::Packet &packet) const {
 
 void Player::deserialize(sf::Packet &packet) {
     packet >> position.x >> position.y >> direction.x >> direction.y >> velocity;
+}
+
+int Player::getID() {
+    return pid;
 }

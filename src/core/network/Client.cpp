@@ -35,7 +35,7 @@ void Client::sendInput() {
     sf::Packet packet;
     packet << PacketType::PLAYER_INPUT;
 
-    Player player = World::players[0];
+    Player player = *World::player;
     player.serialize(packet);
 
     if(socket.send(packet) != sf::Socket::Done){

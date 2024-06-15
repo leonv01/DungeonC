@@ -13,7 +13,11 @@ namespace Direction {
     };
 }
 
+static int id = 0;
+
 class Player : Entity, Serializable{
+private:
+    int pid;
 public:
     Player();
     Player(Vector2 position, Vector2 direction, float velocity);
@@ -35,6 +39,8 @@ public:
     sf::Texture getTexture() override;
     float getX() const;
     float getY() const;
+
+    int getID();
 };
 
 #endif //DUNGEONC_PLAYER_H

@@ -32,8 +32,6 @@ add_executable(main
         include/core/Resources.h
         src/graphics/Animator.cpp
         include/graphics/Animator.h
-        src/core/network/Networking.cpp
-        include/core/network/Networking.h
         src/core/network/Server.cpp
         include/core/network/Server.h
         src/core/network/Client.cpp
