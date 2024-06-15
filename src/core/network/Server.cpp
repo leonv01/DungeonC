@@ -56,6 +56,7 @@ void Server::receivePackets() {
                     case PacketType::PLAYER_INPUT:
                         player.deserialize(packet);
                         std::cout << "Received player input from client!" << std::endl;
+                        std::cout << "Player position: " << player.getX() << ", " << player.getY() << std::endl;
                         break;
                     default:
                         std::cout << "Received unknown packet from client!" << std::endl;

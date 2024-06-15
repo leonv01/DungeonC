@@ -4,8 +4,11 @@
 #include "core/network/Server.h"
 #include "core/network/Client.h"
 
+#include "core/World.h"
+
 int main() {
-    // Game::run();-
+    Game::run();
+    World::players.push_back(Player{{1,1}, {1,1}, 4});
 
     std::cout << "Server (s) or client (c)? ";
     char choice;

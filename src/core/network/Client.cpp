@@ -6,6 +6,7 @@
 #include "core/network/Client.h"
 #include "core/network/PacketTypes.h"
 #include "entity/Player.h"
+#include "core/World.h"
 
 Client::Client(const std::string &host, unsigned short port) : host(host), port(port) {
     if(socket.connect(host, port) == sf::Socket::Done){
@@ -34,7 +35,7 @@ void Client::sendInput() {
     sf::Packet packet;
     packet << PacketType::PLAYER_INPUT;
 
-    Player player{{2,3}, {1,1}, 4};
+    Player player = World::players[0];
     player.serialize(packet);
 
     if(socket.send(packet) != sf::Socket::Done){
