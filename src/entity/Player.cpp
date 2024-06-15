@@ -70,3 +70,11 @@ void Player::setDirY(float y) {
 void Player::setVelocity(float velocity) {
     this->velocity = velocity;
 }
+
+void Player::serialize(sf::Packet &packet) const {
+    packet << position.x << position.y << direction.x << direction.y << velocity;
+}
+
+void Player::deserialize(sf::Packet &packet) {
+    packet >> position.x >> position.y >> direction.x >> direction.y >> velocity;
+}

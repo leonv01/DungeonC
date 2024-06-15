@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include "core/network/Client.h"
+#include "core/network/PacketTypes.h"
+#include "entity/Player.h"
 
 Client::Client(const std::string &host, unsigned short port) : host(host), port(port) {
     if(socket.connect(host, port) == sf::Socket::Done){
@@ -29,20 +31,31 @@ void Client::stop() {
 }
 
 void Client::sendInput() {
-    std::string input;
-    std::cout << "Enter a message: ";
-    std::getline(std::cin, input);
-
     sf::Packet packet;
-    packet << input;
-    socket.send(packet);
+    packet << PacketType::PLAYER_INPUT;
+
+    Player player{{2,3}, {1,1}, 4};
+    player.serialize(packet);
+
+    if(socket.send(packet) != sf::Socket::Done){
+        std::cout << "Error while sending packet!" << std::endl;
+    }
 }
 
 void Client::receiveUpdates() {
     sf::Packet packet;
     if(socket.receive(packet) == sf::Socket::Done){
-        std::string message;
-        packet >> message;
-        std::cout << "Received message from server: " << message << std::endl;
+        PacketType type;
+        packet >> type;
+        Player player;
+
+        switch(type){
+            case PacketType::PLAYER_UPDATE:
+                player.deserialize(packet);
+                std::cout << "Received player update from server!" << std::endl;
+                break;
+            default:
+                break;
+        }
     }
 }

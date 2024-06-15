@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include "core/network/Server.h"
+#include "core/network/PacketTypes.h"
+#include "entity/Player.h"
 
 Server::Server(unsigned int port) : port(port) {
     listener.listen(port);
@@ -20,7 +22,7 @@ void Server::run() {
                 receivePackets();
             }
         }
-        sendPackets();
+        sendUpdates();
     }
 }
 
@@ -46,15 +48,25 @@ void Server::receivePackets() {
         if(selector.isReady(*client)){
             sf::Packet packet;
             if(client->receive(packet) == sf::Socket::Done){
-                std::string message;
-                packet >> message;
-                std::cout << "Received message: " << message << std::endl;
+                PacketType type;
+                packet >> type;
+
+                Player player;
+                switch(type){
+                    case PacketType::PLAYER_INPUT:
+                        player.deserialize(packet);
+                        std::cout << "Received player input from client!" << std::endl;
+                        break;
+                    default:
+                        std::cout << "Received unknown packet from client!" << std::endl;
+                        break;
+                }
             }
         }
     }
 }
 
-void Server::sendPackets() {
+void Server::sendUpdates() {
     for(auto& client : clients){
         sf::Packet packet;
         packet << "Hello, client!";

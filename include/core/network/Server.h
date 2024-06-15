@@ -19,7 +19,7 @@ public:
 private:
     void acceptClients();
     void receivePackets();
-    void sendPackets();
+    void sendUpdates();
 
     sf::TcpListener listener;
     std::vector<std::unique_ptr<sf::TcpSocket>> clients;
