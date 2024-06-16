@@ -81,8 +81,6 @@ void Server::sendUpdates() {
         packet << PacketType::PLAYER_UPDATE;
         World::player->serialize(packet);
 
-        if(client->send(packet) != sf::Socket::Done){
-            std::cout << "Error while sending packet!" << std::endl;
-        }
+        client->send(packet);
     }
 }

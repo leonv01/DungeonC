@@ -48,11 +48,12 @@ void Client::receiveUpdates() {
     if(socket.receive(packet) == sf::Socket::Done){
         PacketType type;
         packet >> type;
-        Player player;
 
         switch(type){
             case PacketType::PLAYER_UPDATE:
-                player.deserialize(packet);
+                for(auto& p : World::players){
+                    p.deserialize(packet);
+                }
                 std::cout << "Received player update from server!" << std::endl;
                 break;
             default:
