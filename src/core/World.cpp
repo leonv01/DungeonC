@@ -5,8 +5,7 @@
 #include "core/World.h"
 
 void World::generate() {
-    player = std::make_shared<Player>(Vector2(0, 0), Vector2(0, 0), 0);
-
+    World::player = std::make_shared<Player>(Vector2(0, 0), Vector2(0, 0), 0);
 }
 
 void World::addPlayer(const Player& p) {

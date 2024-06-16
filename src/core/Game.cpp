@@ -89,6 +89,15 @@ void Game::update() {
         sprite.setScale(2.0f, 2.0f);
         Render::window->draw(sprite);
     //}
+
+    for(auto& p : World::players){
+        p.update(1.0f);
+        texture = p.getTexture();
+        sprite = sf::Sprite(textureManager.get(Texture::ID::PLAYER));
+        sprite.setPosition(p.getX(), p.getY());
+        sprite.setScale(2.0f, 2.0f);
+        Render::window->draw(sprite);
+    }
 /*
     for(auto& enemy : World::enemies) {
         enemy.update(1.0f);

@@ -9,8 +9,6 @@
 
 int main() {
     // Game::run();
-    World::players.push_back(Player{{1,1}, {1,1}, 4});
-
     std::cout << "Host (s) or join (c)? ";
     char choice;
     std::cin >> choice;
@@ -26,10 +24,6 @@ int main() {
         Client client("127.0.0.1", 25565);
         client.run();
     }
-
-    std::cout << "Test " << World::players[0].getX() << std::endl;
-
     Game::run();
-
     return 0;
 }

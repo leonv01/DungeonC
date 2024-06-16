@@ -19,7 +19,8 @@ void Server::run() {
         if(selector.wait()){
             if(selector.isReady(listener)){
                 acceptClients();
-            } else {
+            }
+            else {
                 receivePackets();
             }
         }
@@ -37,6 +38,13 @@ void Server::acceptClients() {
         clients.push_back(std::move(client));
         selector.add(*clients.back());
         std::cout << "Client connected!" << std::endl;
+
+        World::players.push_back(Player{{200,200}, {1,1}, 1});
+        std::cout << "Player added!" << std::endl;
+    }
+    else if(listener.accept(*client) == sf::Socket::Disconnected || listener.accept(*client) == sf::Socket::Error){
+        World::players.pop_back();
+        std::cout << "Player removed!" << std::endl;
     }
     else {
         client.reset();
@@ -52,12 +60,11 @@ void Server::receivePackets() {
                 PacketType type;
                 packet >> type;
 
-                Player player = *World::player;
                 switch(type){
                     case PacketType::PLAYER_INPUT:
-                        player.deserialize(packet);
-                        std::cout << "Received player input from client!" << std::endl;
-                        std::cout << "Player position: " << player.getX() << ", " << player.getY() << std::endl;
+                        for(auto& p : World::players){
+                            p.deserialize(packet);
+                        }
                         break;
                     default:
                         std::cout << "Received unknown packet from client!" << std::endl;
@@ -71,7 +78,11 @@ void Server::receivePackets() {
 void Server::sendUpdates() {
     for(auto& client : clients){
         sf::Packet packet;
-        packet << "Hello, client!";
-        client->send(packet);
+        packet << PacketType::PLAYER_UPDATE;
+        World::player->serialize(packet);
+
+        if(client->send(packet) != sf::Socket::Done){
+            std::cout << "Error while sending packet!" << std::endl;
+        }
     }
 }
