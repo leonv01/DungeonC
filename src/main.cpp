@@ -21,9 +21,10 @@ int main() {
         serverThread.detach();
     }
     else if(choice == 'c') {
-        Client client("127.0.0.1", 25565);
+        Client client("172.30.176.1", 25565);
         client.run();
     }
     Game::run();
+
     return 0;
 }

@@ -93,7 +93,7 @@ void Game::update() {
     for(auto& p : World::players){
         p.update(1.0f);
         texture = p.getTexture();
-        sprite = sf::Sprite(textureManager.get(Texture::ID::PLAYER));
+        sprite = sf::Sprite(textureManager.get(Texture::ID::ENEMY));
         sprite.setPosition(p.getX(), p.getY());
         sprite.setScale(2.0f, 2.0f);
         Render::window->draw(sprite);

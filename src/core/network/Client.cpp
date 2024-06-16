@@ -51,8 +51,8 @@ void Client::receiveUpdates() {
 
         switch(type){
             case PacketType::PLAYER_UPDATE:
-                for(auto& p : World::players){
-                    p.deserialize(packet);
+                if(!World::players.empty()){
+                    World::players[0].deserialize(packet);
                 }
                 std::cout << "Received player update from server!" << std::endl;
                 break;

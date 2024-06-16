@@ -62,9 +62,10 @@ void Server::receivePackets() {
 
                 switch(type){
                     case PacketType::PLAYER_INPUT:
-                        for(auto& p : World::players){
-                            p.deserialize(packet);
+                        if(!World::players.empty()){
+                            World::players[0].deserialize(packet);
                         }
+
                         break;
                     default:
                         std::cout << "Received unknown packet from client!" << std::endl;
