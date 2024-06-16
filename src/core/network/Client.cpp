@@ -35,8 +35,9 @@ void Client::sendInput() {
     sf::Packet packet;
     packet << PacketType::PLAYER_INPUT;
 
-    Player player = *World::player;
-    player.serialize(packet);
+
+    if(World::player != nullptr)
+        World::player->serialize(packet);
 
     if(socket.send(packet) != sf::Socket::Done){
         std::cout << "Error while sending packet!" << std::endl;

@@ -10,8 +10,11 @@
 int main() {
     // Game::run();
     std::cout << "Host (s) or join (c)? ";
-    char choice;
-    std::cin >> choice;
+    char choice = 's';
+
+
+    //std::cin >> choice;
+
 
     if(choice == 's'){
         std::thread serverThread([](){
