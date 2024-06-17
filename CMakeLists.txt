@@ -38,6 +38,7 @@ add_executable(main
         include/core/network/Client.h
         include/core/Serializable.h
         include/core/network/PacketTypes.h
+        include/core/Input.h
 )
 target_link_libraries(main PRIVATE sfml-graphics sfml-window sfml-system sfml-audio sfml-network)
 target_compile_features(main PRIVATE cxx_std_17)

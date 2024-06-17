@@ -22,6 +22,14 @@ public:
 
     static void loadResources();
 
+    static void setRunning(bool _r) {
+        Game::running = _r;
+    }
+
+    static bool isRunning() {
+        return running;
+    }
+
 private:
     static void loadTextures();
     static void loadSounds();

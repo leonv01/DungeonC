@@ -7,6 +7,7 @@
 #include "core/network/PacketTypes.h"
 #include "entity/Player.h"
 #include "core/World.h"
+#include "core/Game.h"
 
 Client::Client(const std::string &host, unsigned short port) : host(host), port(port) {
     if(socket.connect(host, port) == sf::Socket::Done){
@@ -17,8 +18,8 @@ Client::Client(const std::string &host, unsigned short port) : host(host), port(
 }
 
 void Client::run() {
-    running = true;
-    while(running){
+
+    while(Game::isRunning()){
         if(selector.wait()) {
             if (selector.isReady(socket)) {
                 receiveUpdates();
@@ -26,6 +27,8 @@ void Client::run() {
         }
         sendInput();
     }
+
+    socket.disconnect();
 }
 
 void Client::stop() {

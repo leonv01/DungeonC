@@ -84,3 +84,19 @@ void Player::deserialize(sf::Packet &packet) {
 int Player::getID() {
     return pid;
 }
+
+void Player::moveUp() {
+    direction = { 0.0f, -1.0f };
+}
+
+void Player::moveDown() {
+    direction = { 0.0f, 1.0f };
+}
+
+void Player::moveLeft() {
+    direction = { -1.0f, 0.0f };
+}
+
+void Player::moveRight() {
+    direction = { 1.0f, 0.0f };
+}

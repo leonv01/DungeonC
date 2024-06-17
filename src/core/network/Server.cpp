@@ -7,6 +7,7 @@
 #include "core/network/PacketTypes.h"
 #include "entity/Player.h"
 #include "core/World.h"
+#include "core/Game.h"
 
 Server::Server(unsigned int port) : port(port) {
     listener.listen(port);
@@ -15,7 +16,7 @@ Server::Server(unsigned int port) : port(port) {
 
 void Server::run() {
     running = true;
-    while(running){
+    while(Game::isRunning()){
         if(selector.wait()){
             if(selector.isReady(listener)){
                 acceptClients();
@@ -26,6 +27,7 @@ void Server::run() {
         }
         sendUpdates();
     }
+
 }
 
 void Server::stop() {

@@ -24,4 +24,3 @@ void World::serialize(sf::Packet &packet) const {
     }
 
 }
-

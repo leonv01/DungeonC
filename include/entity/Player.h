@@ -30,6 +30,10 @@ public:
     void serialize(sf::Packet& packet) const override;
     void deserialize(sf::Packet& packet) override;
 
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
 
     void setTexture(sf::Texture sprite) override;
     void setVelocity(float velocity);
