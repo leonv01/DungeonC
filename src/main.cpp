@@ -8,13 +8,9 @@
 #include <thread>
 
 int main() {
-    // Game::run();
     std::cout << "Host (s) or join (c)? ";
-    char choice = 's';
-
-
-    //std::cin >> choice;
-
+    char choice;
+    std::cin >> choice;
 
     if(choice == 's'){
         std::thread serverThread([](){
@@ -24,8 +20,11 @@ int main() {
         serverThread.detach();
     }
     else if(choice == 'c') {
-        Client client("172.30.176.1", 25565);
-        client.run();
+        std::thread clientThread([]() {
+            Client client("192.168.0.131", 25565);
+            client.run();
+        });
+        clientThread.detach();
     }
     Game::run();
 

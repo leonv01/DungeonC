@@ -12,6 +12,7 @@ Client::Client(const std::string &host, unsigned short port) : host(host), port(
     if(socket.connect(host, port) == sf::Socket::Done){
         selector.add(socket);
         std::cout << "Connected to server!" << std::endl;
+        World::players.push_back(Player{{0,0}, {1,1}, 1});
     }
 }
 
